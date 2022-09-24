@@ -1,13 +1,15 @@
 #ifndef Tree_HPP
 #define Tree_HPP
+
 #include <iostream>
 #include <queue>
 #include <vector>
+
 using namespace std;
 
 struct Record{
 	pair<string, pair<int,float>> value;
-	vector<bool> translate;
+	vector<bool> t;
     int nivel;
 };
 

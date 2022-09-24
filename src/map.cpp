@@ -11,10 +11,8 @@ void Hash::normalize(){
         itr->second.second=((float)(itr->second.first)/((itmax->second.first) - (itmin->second.first)));
 }
 
-
 void Hash::fillMap(){
     fstream myFile;
-    int valor;
     string caminho,palavras,linha,arquivos,fileName;
     fileName = "politica.txt";
     caminho="files/";
@@ -23,13 +21,8 @@ void Hash::fillMap(){
         printf("Arquivo não encontrado\n");
     while (myFile >> palavras)
     {
-        while(palavras.back() == ',' || palavras.back() =='.' || palavras.back() =='!' || palavras.back() =='?' || palavras.back() ==';' || palavras.back() ==':' || palavras.back() ==')' || palavras.back() =='-' || palavras.back() =='\'' || palavras.back() =='\"' || palavras.back() =='/')
-            palavras.pop_back();
-        while(palavras.front()=='('||palavras.front()=='-'||palavras.front()=='\''||palavras.front()=='\"')
-            palavras.erase(palavras.begin());
-        valor=palavras[1];
-        if(palavras.front()==-61 && valor>=-128 && valor<=-99)
-            palavras[1]=palavras[1]+32;
+        while(palavras.back() == ',' || palavras.back() =='.' || palavras.back() =='!' || palavras.back() =='?' || palavras.back() ==';' || palavras.back() ==':' || palavras.back() ==')' || palavras.back() =='-' || palavras.back() =='\'' || palavras.back() =='\"' || palavras.back() =='/') palavras.pop_back();
+        while(palavras.front()=='('||palavras.front()=='-'||palavras.front()=='\''||palavras.front()=='\"') palavras.erase(palavras.begin());
         transform(palavras.begin(), palavras.end(), palavras.begin(),[](unsigned char c){ return tolower(c); });
         //tratamento para remoção de StopWords
         if (palavras.size()>0){
@@ -51,7 +44,7 @@ void Hash::fillMap(){
 
 
 
-void Hash::CreateTree(Tree **TREE){
+void Hash::CriaArvore(Tree **TREE){
     vector<pair<string, pair<int,float>>> vec;
     for (auto& it : this->umap)
         vec.push_back(it);
@@ -95,7 +88,7 @@ void Result(Tree **T){
 		for (int i = 0; i < tempCont; i++){
 			temp =tempFila.front();
             if (temp->item.value.first!="")
-                hash[temp->item.value.first]=temp->item.translate;
+                hash[temp->item.value.first]=temp->item.t;
 			tempFila.pop();
 			if (temp->left) {
 				tempFila.push(temp->left);

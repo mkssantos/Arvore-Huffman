@@ -14,15 +14,11 @@ void Insert(Tree **T, pair<string, pair<int,float>> valor){
 		(*T)->right = nullptr;
 		return;
 	}
-	if (valor.second.second < (*T)->item.value.second.second)
-		Insert(&(*T)->left, valor);
-	else if (valor.second.second > (*T)->item.value.second.second)
-		Insert(&(*T)->right, valor);
 }
 
 void HeightTreeWidth(int *maxCont, Tree **T){
 	queue<Tree*> tempFila;
-	vector<bool> translate;
+	vector<bool> t;
 	Tree *temp;
 	int tempCont=1,cont=0;
 	(*maxCont)=0;
@@ -31,22 +27,22 @@ void HeightTreeWidth(int *maxCont, Tree **T){
 		cont=0;
 		for (int i = 0; i < tempCont; i++){
 			temp =tempFila.front();
-			translate=temp->item.translate;
+			t=temp->item.t;
 			tempFila.pop();
 			if (temp->left) {
 				tempFila.push(temp->left);
 				temp->left->item.nivel=(*maxCont)+1;
 				cont++;
-				translate.push_back(0);
-				temp->left->item.translate=translate;
+				t.push_back(0);
+				temp->left->item.t=t;
 			}
-			translate=temp->item.translate;
+			t=temp->item.t;
 			if (temp->right) {
 				tempFila.push(temp->right);
 				temp->right->item.nivel=(*maxCont)+1;
 				cont++;
-				translate.push_back(1);
-				temp->right->item.translate=translate;
+				t.push_back(1);
+				temp->right->item.t=t;
 			}
 		}
 		tempCont=cont;

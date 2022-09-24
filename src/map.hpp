@@ -10,11 +10,10 @@ class Hash{
     private:
         unordered_map <string, pair<int,float>> umap;
     public:
-        ~Hash();
         Hash();
     void fillMap();
     void normalize();
-    void CreateTree(Tree **TREE);
+    void CriaArvore(Tree **TREE);
 };
 bool comparadores(pair<string, pair<int,float>>& a,pair<string, pair<int,float>>& b);
 bool comparadoresTree(Tree*&a,Tree*& b);
